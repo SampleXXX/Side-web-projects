@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    user-select: none;
+}
+
+
+    
+#title {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    font-weight: 200;
+    margin-bottom: 50px;
+
+}
+
+.moved {
+    display: flex;
+    
+    justify-content: center;
+
+}
+
+.images {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+}
+
+.middle {
+    opacity: 0;
+    transition: 0.5s ease;
+    translate: 25% -500%;
+    background-color: white;
+    width: 40%;
+    text-align: center;
+    box-shadow: 0 0 5px 0.1px white;
+    scale: 1.3;
+}
+
+
+.hoverable:hover .middle{
+    cursor: pointer;
+    opacity: 1;
+}
+
+
+.text {
+    color: gray;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+
+.iframe {
+    -moz-transform: scale(0.90, 0.90); 
+
+    width: 99.5%;
+    height: 556px;
+
+    margin-top: -35px;
+}
+
+    </style>
+</head>
+<body>
+
+
+    <script>
+        function createBlock(value) {
+            alert(value.id);
+
+            let con = document.getElementById('con');
+            let title = document.getElementById('title');
+            let holder = document.getElementById('i_h');
+            con.style.visibility = "hidden";
+            con.style.position = "absolute";
+
+            title.style.visibility = 'visible';
+            title.classList.add('moved');
+            document.body.appendChild(title);
+
+            let iframe = document.createElement('iframe');
+
+            
+            document.body.appendChild(iframe);
+            iframe.style.visibility = 'visible';
+
+            iframe.classList.add("iframe");
+
+            iframe.src = "http://127.0.0.1:5501/" + value.id + "/" + value.id + ".html";
+
+
+            iframe.scrolling = "no";
+        }
+
+    </script>
+
+
+    <div id ="con" class="container">
+        <h1 id="title">Anonymous Games</h1>
+
+        <div class="images">
+            <div class="hoverable">
+                <a id="Stopwatch" onclick="createBlock(this)"><img src="https://www.online-timers.com/png/en/stopwatch-9.png"  width="20px"class="image"></a>
+                <div class="middle">
+                    <span><a class="text" id="Calculator" onclick="createblock(this)">Stopwatch Game</a></span>
+            </div>
+        </div>
+        
+        <div class="hoverable calculator">
+            <a id="Calculator" onclick="createBlock(this)"><img src="https://media.istockphoto.com/vectors/calculator-isolated-on-a-colored-background-vector-id544462430?k=20&m=544462430&s=612x612&w=0&h=iTSj0mGztBISBiU18BxAuFufsQfEDAVp6P9zMbOXM44="  width="20px"class="image"></a>
+            <div class="middle">
+                <span><a class ="text" id="Calculator" onclick="createBlock(this)">Caclulator Game</a></span>
+        </div>
+    </div>
+    <div class="hoverable">
+        <a id="Signup" onclick="createBlock(this)"><img src="https://www.paidmembershipspro.com/wp-content/uploads/2016/06/signup.png"  width="20px"class="image"></a>
+        <div class="middle">
+            <span><a class="text" id="Signup" onclick="createblock(this)">Signup </a></span>
+    </div>
+    </div>
+
+</body>
+</html>

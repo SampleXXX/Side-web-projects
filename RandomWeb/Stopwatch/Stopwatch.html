@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOS stopwatch</title>
+
+        <style>
+            * {
+    margin: 0;
+    padding: 0;
+    -webkit-user-drag: none;
+
+}
+
+body {
+        color: aqua;
+    background-color: black;
+}
+
+.ison {
+    background-color: red;
+}
+
+
+.isoff {
+    background-color: lightgreen;
+}
+
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+
+.time {
+    font-size: 350%;
+    height: fit-content;
+    margin-top: 40px;
+    box-shadow: 0 0 10px 0.1px wheat;
+    border-radius: 10px;
+    padding: 10px;
+    color: blanchedalmond;
+}
+
+.btns {
+    position: relative;
+    min-height: 150px;
+    
+}
+
+
+
+
+#stopstart {
+    
+    position: absolute;
+    bottom: 20%;
+    left: -340px;
+
+    border: none;
+    padding: 10px;
+        font-size: 30px;
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 20px;
+    box-shadow: 0 0 15px 0.01px blanchedalmond;
+}
+
+#reset {
+    position: absolute;
+    bottom: 20%;
+    left: -130px;
+    
+    border: none;
+    padding: 10px;
+        font-size: 30px;
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0.01px wheat;
+}
+
+#recent {
+    position: absolute;
+        right: 100px;
+        top: 50px;
+        max-width: 30%;
+    margin-left: 0;
+    
+}
+.trace {
+    padding-top: 20px;
+    font-size: 150%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: purple;
+
+}
+
+.top {
+    color: red;
+    font-size: 20px;
+
+}
+
+
+#links {
+    position: relative;
+box-shadow: 0 0 5px 2px purple;
+        
+padding: 10px;
+
+}
+
+#other {
+    color: aqua;
+    text-decoration: none;
+        border: 0.1px dotted red;
+        box-shadow: 0 0 5px 0.01px red;
+        border-radius: 5px;
+        padding: 3px;
+        font-family: 'Courier New', Courier, monospace;
+
+}
+
+
+#other:hover {
+    color: yellow;
+}
+        </style>
+</head>
+<body >
+    <div id="links">
+        <a href="./Caculator.html" id="other">Calculator App</a>
+    </div>
+    <div class="container">
+        
+        <div class="time">
+            <span id="hours">00:</span>
+            <span id="minutes">00:</span>
+            <span id="seconds">00,</span>
+            <span id="miliseconds">00</span>
+        </div>
+        <div class="btns">
+            <button id="stopstart">start</button>
+            <button id="reset">reset</button>
+        </div>
+        <div id="recent">
+            <span class="top">Recent Times</span>
+        </div>
+
+
+    </div>
+
+    <script>
+        let start = document.getElementById("stopstart");
+let reset = document.getElementById("reset");
+
+let ison = false;
+
+let s = 0;
+let ms = 0;
+let m = 0;
+let h = 0;
+
+let recent = document.getElementById('recent');
+let todete = document.getElementsByClassName('trace');
+let si = document.getElementById('seconds');
+let msi = document.getElementById('miliseconds');
+let mi = document.getElementById('minutes');
+let hi = document.getElementById('hours');
+let recents = 0;
+function addRecent(time) {
+    if (time == "00:00:00,00")
+    {
+        alert('invalid.')
+        return;
+    }
+    recents += 1;
+    if (recents >= 10) 
+    {
+
+        todete[0].remove();
+    }
+
+
+    var sp = document.createElement('span');
+    sp.innerHTML = time;
+
+
+    sp.classList.add('trace');
+    
+
+    recent.appendChild(sp);
+
+    
+}
+function addingnumbers() {
+        ms++;
+        msi.innerHTML = ms < 10 ? '0' + ms: ms;
+
+        if (ms >= 99) {
+            s+= 1;
+            ms = 0;
+            si.innerHTML = s < 10 ? '0' + s + ',': s + ',';
+        }
+
+        if (s >= 60)
+        {
+            m+= 1;
+            s = 0;
+            mi.innerHTML = m < 10 ? '0' + m + ":" : m + ":";
+        }
+}
+let clocking;
+function clock(reset) {
+    if (reset === true)
+    {
+        let message = hi.innerHTML + mi.innerHTML  + si.innerHTML +  msi.innerHTML;
+        addRecent(message);
+        s = 0;
+        ms = 0;
+        m = 0;
+        h = 0;
+        si.innerHTML = '00,';
+        msi.innerHTML = '00';
+        mi.innerHTML = '00:';
+            hi.innerHTML = '00:';
+
+            
+        return;
+    }
+    if(ison === false)
+    {
+        ison = true;
+        start.classList.remove('isoff');
+        start.classList.add('ison');
+        start.innerHTML = 'stop';
+        clocking = setInterval(addingnumbers, 10);
+
+    }
+    else {
+        ison = false;
+        start.classList.remove('ison');
+        start.classList.add('isoff');
+        start.innerHTML = 'start';
+        clearInterval(clocking);
+        return;
+    }
+        
+
+}
+start.addEventListener("click", (e) => {
+    clock();
+
+
+})
+
+reset.addEventListener("click", (e) => {
+    clock(true);
+        
+
+})
+
+
+
+    </script>
+</body>
+</html>

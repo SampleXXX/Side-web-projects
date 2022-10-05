@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOS calculator</title>
+
+        <style>* {
+            margin: 0;
+            padding: 0;
+        }
+        
+        
+        html, body  {
+            min-height: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgba(120, 38, 197, 0.587);
+            
+        }
+        
+        
+        .container {
+            min-height: 100%;
+            height: 100%;
+        
+        }
+        
+        
+        #result {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            color: white;
+            height: 35%;
+        font-size: 80px;
+        padding-right: 10px;
+        margin-bottom: 37px;
+        }
+        
+        
+        
+        .buttons {
+            width: 100%;
+            height: 50%;
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+            position: relative;
+        
+        }
+        
+        
+        
+        .buttons button {
+            font-size: 35px;
+            border: none;
+            border-radius: 250px;
+            margin: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            cursor: pointer;
+            -webkit-user-drag: none;
+        }
+        
+        .a0 {
+            grid-column: span 2;
+        }
+        
+        
+        .m {
+            background-color: aquamarine;
+        }</style>
+</head>
+<body>
+    <div class="container">
+        <span id="result">0</span>
+
+        <div class="buttons">
+            <button class="ac m" value="AC">AC</button>
+            <button class="+/- m" value="+/-">+/-</button>
+            <button class="% m" value="%">%</button>
+            <button class="/ m" value="/">/</button>
+            <button class="7 " value="7">7</button>
+            <button class="8 " value="8">8</button>
+            <button class="9" value="9">9</button>
+            <button class="X m" value="X">X</button>
+            <button class="4" value="4">4</button>
+            <button class="5" value="5">5</button>
+            <button class="6" value="6">6</button>
+            <button class="- m" value="-">-</button>
+            <button class="1" value="1">1</button>
+            <button class="2" value="2">2</button>
+            <button class="3" value="3">3</button>
+            <button class="+ m" value="+">+</button>
+            <button class="a0 m" value="0">0</button>
+            <button class=", m" value=",">,</button>
+            <button class="= m" value="=">=</button>
+        </div>
+    </div>
+
+    <script>
+        let result = document.getElementById("result");
+let buttons = document.getElementsByClassName("buttons");
+
+
+let firstValue = "";
+let isFirstValue = false;
+let secondValue = "";
+let isSecondsValue = false;
+let sign= "";
+let resultValue = 0;
+
+for (let i = 0; i < buttons.length; i ++) {
+    buttons[i].addEventListener('click', (e) => {
+        let atr = e.target.getAttribute('value');
+
+        if (atr === '=' && sign != "" && firstValue != "" && secondValue != "") {
+            if (sign === '/') {
+                let e = firstValue / secondValue;
+                result.innerHTML = e;
+                isFirstValue = false;
+            }
+        }
+        if (atr === '/') {
+            sign = '/';
+            isFirstValue = true;
+        }
+        if (isFirstValue === false) {
+            getFirstValue(atr);
+        }
+
+        if (isSecondsValue == false && isFirstValue == true) {
+
+            if (atr != '/' && atr != '+' && atr != '-' && atr != '=' && atr != '+/-' && atr != '%' && atr != 'AC') 
+            {
+                getSecondValue(atr);
+
+            }
+        }
+
+
+    })
+
+    function getFirstValue(el) {
+        result.innerHTML ="";
+        firstValue += el;
+        result.innerHTML = firstValue;
+        firstValue = +firstValue;
+
+    }
+
+    function getSecondValue(el) {
+        if (firstValue != "" && sign != "") {
+            result.innerHTML ="";
+            secondValue += el;
+            result.innerHTML = secondValue;
+            secondValue = +secondValue;
+        }
+    }
+}
+
+    </script>
+</body>
+</html>

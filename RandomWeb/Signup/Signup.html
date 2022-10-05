@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        
+
+body {
+    margin: 0;
+    padding: 0;
+}
+#email_text {
+
+    font-size: 3vh;
+}
+
+
+#email {
+    border: none;
+    outline: none;
+    box-shadow: 0 0 3px 0.01px green;
+    border-radius: 1vh;
+    padding: 0.5vh;
+}
+
+
+#password {
+    padding: 0.5vh;
+    border: none;
+    margin-top: 0.5vh;
+    outline: none;
+    box-shadow: 0 0 3px 0.01px red;
+    border-radius: 1vh;
+}
+
+#password_text {
+    font-size: 3vh;
+}
+.signup {
+    display: grid;
+    margin: calc(20vh) auto;
+    width: fit-content;
+
+    padding: 5vh;
+    border-radius: 1vh;
+    
+
+
+    box-shadow: 0 0 5px 0.01px black;
+}
+
+.signup > * {
+    margin-top: 2vh;
+    font-size: 2.2vh;
+}
+
+
+
+#email {
+    margin-top: 0.5vh;
+}
+
+
+#form_title {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 200;
+    font-size: 8vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    text-transform: uppercase;
+    box-shadow: 0 0 5px 0.01px black;
+    text-align: center;
+    border-radius: calc(4px);
+}
+
+#submit_button {
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    box-shadow: 0 0 3px 0.01px black;
+    border-radius: 0.3vh;
+    margin-top: 5vh;
+    background-color: antiquewhite;
+    padding: 0.5vh;
+}
+
+
+#eez {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+
+#counter {
+    margin-bottom: -40%;
+    margin-top: -11%;
+    margin-right: -7%;
+    text-align: right;
+    font-size: 4vh;
+    font-weight: 200;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+    </style>
+</head>
+<body>
+    <form class="signup" id="signup" onsubmit="return false;">  
+        <h4 id="counter">1/2</h4>
+        <h1 id="form_title"> Sign-up</h1>
+        <label id="email_text" for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+        <label id="password_text" for="password">Password</label>
+        <input type="password" id="password" name="password"placeholder="Your Password" required>
+
+        <input type="submit" id="submit_button" value="NEXt" onclick="MoveOn1()">
+
+    </form> 
+    
+    <script>
+
+        function MoveOn1() {
+            let input1 = document.getElementById('email');
+            let input2 = document.getElementById('password')
+
+            let input1_text = document.getElementById('email_text');
+            let input2_text = document.getElementById('password_text');
+
+
+            let email = input1.value;
+            let password = input2.value;
+
+            if (email == ""|| password == "")
+            {
+                alert("invalid inputs");
+                return 1;
+            }
+            input1.value =""
+            document.getElementById('counter').innerHTML = "2/2";
+            input2.value =""
+
+            input1_text.innerHTML = "Username"
+            input1.placeholder = "Your username";
+
+            input2_text.innerHTML ="Profile Picture";
+            input2.placeholder = "";
+            input2.type = "file";
+            input2.accept ="image/*"
+
+            input2.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/320px--Insert_image_here-.svg.png";
+            
+
+        }
+
+    </script>
+</body>
+</html>
